@@ -79,7 +79,9 @@ One JSON file and one input file per case in `cases/`:
 * `negative_control` is true for a case that must pass; a control's expected
   verdict is `PASS`.
 * `input` is a relative path inside `cases/`; absolute paths and `..` are
-  refused.
+  refused. The case file and the input must both resolve inside `cases/`, so a
+  symlink cannot point the runner at another file. The gate receives the
+  resolved path.
 * `sha256` pins the input's exact bytes. The runner hashes every input before
   it runs anything and refuses a changed byte, so a verifier that normalises
   text cannot quietly accept an edited vector.
@@ -139,4 +141,5 @@ python3 -I test_run_vectors.py
 The tests check the pack's shape (counts, unique ids, pinned inputs), that it
 passes against `example_gate.py`, that a deliberately broken copy of the gate
 fails it, and that the runner refuses a tampered input, an unknown verdict, a
-duplicate id, a path escape and a pack with no must-fail case.
+duplicate id, a path escape, a case file or input symlinked outside `cases/`,
+and a pack with no must-fail case.

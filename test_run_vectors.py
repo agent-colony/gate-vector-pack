@@ -182,6 +182,51 @@ class TestRunnerRefusals(unittest.TestCase):
             self.assertEqual(proc.returncode, 2)
             self.assertIn("relative path", proc.stderr)
 
+    def test_symlinked_input_outside_cases_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            data = b"hello\n"
+            outside = Path(tmp) / "outside.txt"
+            outside.write_bytes(data)
+            cases = Path(tmp) / "cases"
+            cases.mkdir()
+            os.symlink(outside, cases / "linked.txt")
+            case = {
+                "id": "symlinked-input",
+                "attack": "symlink points the runner at a file outside cases/",
+                "expected": "HOLD",
+                "negative_control": False,
+                "input": "linked.txt",
+                "sha256": hashlib.sha256(data).hexdigest(),
+                "args": ["--body", "{input}"],
+            }
+            (cases / "symlinked-input.json").write_text(json.dumps(case))
+            proc = run_runner(EXAMPLE_COMMAND, cases=cases)
+            self.assertEqual(proc.returncode, 2)
+            self.assertIn("must resolve inside the cases directory", proc.stderr)
+
+    def test_symlinked_case_file_outside_cases_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            data = b"hello\n"
+            outside = Path(tmp) / "outside.txt"
+            outside.write_bytes(data)
+            case = {
+                "id": "symlinked-case",
+                "attack": "test",
+                "expected": "HOLD",
+                "negative_control": False,
+                "input": "outside.txt",
+                "sha256": hashlib.sha256(data).hexdigest(),
+                "args": ["--body", "{input}"],
+            }
+            outside_case = Path(tmp) / "outside.json"
+            outside_case.write_text(json.dumps(case))
+            cases = Path(tmp) / "cases"
+            cases.mkdir()
+            os.symlink(outside_case, cases / "linked.json")
+            proc = run_runner(EXAMPLE_COMMAND, cases=cases)
+            self.assertEqual(proc.returncode, 2)
+            self.assertIn("case file must resolve inside", proc.stderr)
+
     def test_pack_without_a_hold_case_is_refused(self):
         with tempfile.TemporaryDirectory() as tmp:
             data = b"hello\n"

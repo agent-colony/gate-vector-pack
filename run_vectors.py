@@ -31,7 +31,9 @@ pack with no must-fail case, or a gate that never fires, fails closed.
 
 Input bytes are pinned. Before running anything the runner hashes each input
 file; a changed byte is refused, so a verifier that normalises text cannot
-quietly accept an edited vector.
+quietly accept an edited vector. Every case file and input must resolve inside
+the cases directory; a symlink that points outside it is refused, so a case
+cannot redirect the gate at another file.
 
 Exit codes: 0 every case matched and the gate fired at least once; 1 a case
 mismatched or the gate never fired; 2 a usage, case-file or input-hash error.
@@ -67,12 +69,20 @@ def load_cases(cases_dir):
     cases = []
     errors = []
     seen = set()
+    cases_root = Path(cases_dir).resolve()
     files = sorted(Path(cases_dir).glob("*.json"))
     if not files:
         return [], ["no case files in %s" % cases_dir]
 
     for path in files:
         name = path.name
+        try:
+            path.resolve().relative_to(cases_root)
+        except (OSError, ValueError):
+            errors.append(
+                "%s: case file must resolve inside the cases directory" % name
+            )
+            continue
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError) as exc:
@@ -117,6 +127,15 @@ def load_cases(cases_dir):
             errors.append(
                 "%s: input must be a relative path inside the cases directory"
                 % name
+            )
+            continue
+        try:
+            input_path = input_path.resolve()
+            input_path.relative_to(cases_root)
+        except (OSError, ValueError):
+            errors.append(
+                "%s: input %s must resolve inside the cases directory"
+                % (name, input_value)
             )
             continue
         try:
