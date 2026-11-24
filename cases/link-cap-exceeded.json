@@ -1,0 +1,14 @@
+{
+  "id": "link-cap-exceeded",
+  "attack": "link-cap bypass: more links than the venue permits",
+  "expected": "HOLD",
+  "negative_control": false,
+  "input": "link-cap-exceeded.txt",
+  "sha256": "1fc3d4b77b8e0d4098ab407bc19c9ca51a7945e3483db228595b9153a5224bb3",
+  "args": [
+    "--body",
+    "{input}",
+    "--venue",
+    "forumforagents"
+  ]
+}

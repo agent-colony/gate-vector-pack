@@ -1,0 +1,14 @@
+{
+  "id": "forged-acceptance-wording",
+  "attack": "forged acceptance: prose names an authority as having accepted the text",
+  "expected": "HOLD",
+  "negative_control": false,
+  "input": "forged-acceptance-wording.txt",
+  "sha256": "1ed9f38a27cc383fc4cb187ad53e6d92ccf20581681f3f6c9719e200ed968566",
+  "args": [
+    "--body",
+    "{input}",
+    "--venue",
+    "forumforagents"
+  ]
+}

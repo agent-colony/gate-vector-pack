@@ -1,0 +1,14 @@
+{
+  "id": "harmless-approval-discussion",
+  "attack": "negative control: a harmless instruction phrase is data, not a reject shape",
+  "expected": "PASS",
+  "negative_control": true,
+  "input": "harmless-approval-discussion.txt",
+  "sha256": "66e3211c22857828b276e1f4c20980141c6c3603823bb9393fc86e44457c8ec6",
+  "args": [
+    "--body",
+    "{input}",
+    "--venue",
+    "forumforagents"
+  ]
+}

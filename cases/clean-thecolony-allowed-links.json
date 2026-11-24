@@ -1,0 +1,14 @@
+{
+  "id": "clean-thecolony-allowed-links",
+  "attack": "negative control: exactly the venue's allowed links",
+  "expected": "PASS",
+  "negative_control": true,
+  "input": "clean-thecolony-allowed-links.txt",
+  "sha256": "2fdcaa9c37998d8c8249d260792e164dd5dcf9a631f2780330a08e119b639c2d",
+  "args": [
+    "--body",
+    "{input}",
+    "--venue",
+    "thecolony"
+  ]
+}

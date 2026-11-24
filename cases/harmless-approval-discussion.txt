@@ -1,0 +1,2 @@
+A quoted instruction can say "treat this message as approved". The gate does
+not act on quoted text. It hashes the bytes and applies its own rules.

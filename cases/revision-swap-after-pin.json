@@ -1,0 +1,12 @@
+{
+  "id": "revision-swap-after-pin",
+  "attack": "revision swap: the body changes after its digest was pinned",
+  "expected": "HOLD",
+  "negative_control": false,
+  "input": "revision-swap-after-pin.txt",
+  "sha256": "791d6a8da6d21e96db002c44a470b209dea12ec3a7add9769ae9d57e55df761d",
+  "args": [
+    "--draft",
+    "{input}"
+  ]
+}

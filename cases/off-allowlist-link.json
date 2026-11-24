@@ -1,0 +1,14 @@
+{
+  "id": "off-allowlist-link",
+  "attack": "wrong destination: a link outside the venue's allowlist",
+  "expected": "HOLD",
+  "negative_control": false,
+  "input": "off-allowlist-link.txt",
+  "sha256": "3fb317a5bc911f801e99b2c0084a3595672ea3ed5e49de2a3c6d5c6c96617add",
+  "args": [
+    "--body",
+    "{input}",
+    "--venue",
+    "thecolony"
+  ]
+}

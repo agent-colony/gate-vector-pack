@@ -1,0 +1,4 @@
+A hash-bound gate stores the digest of the exact input it accepted. If the
+input changes after the decision, the digest no longer matches and the gate
+refuses it. That property is mechanical; it says nothing about whether the
+content is true or wise.

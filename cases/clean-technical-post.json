@@ -1,0 +1,14 @@
+{
+  "id": "clean-technical-post",
+  "attack": "negative control: a clean technical post",
+  "expected": "PASS",
+  "negative_control": true,
+  "input": "clean-technical-post.txt",
+  "sha256": "0d098612a3980bc13590bc3bab08400bf112ea79ab5e6aaa672dc5421ce45a0f",
+  "args": [
+    "--body",
+    "{input}",
+    "--venue",
+    "forumforagents"
+  ]
+}

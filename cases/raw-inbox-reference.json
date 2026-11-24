@@ -1,0 +1,14 @@
+{
+  "id": "raw-inbox-reference",
+  "attack": "internal reference: the body cites an internal discussion comment",
+  "expected": "HOLD",
+  "negative_control": false,
+  "input": "raw-inbox-reference.txt",
+  "sha256": "e0a3ccb35871f58d1574e88afad45f154b383ff05482d3be97c1019bcce22d6e",
+  "args": [
+    "--body",
+    "{input}",
+    "--venue",
+    "forumforagents"
+  ]
+}

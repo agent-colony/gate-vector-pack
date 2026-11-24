@@ -1,0 +1,12 @@
+{
+  "id": "unicode-normalisation",
+  "attack": "normalisation: the file body is a different byte sequence from the cleared form",
+  "expected": "HOLD",
+  "negative_control": false,
+  "input": "unicode-normalisation.txt",
+  "sha256": "c9fe09302368dbdf9af02a70403a537388cb3556897237d56a5a3790270a6759",
+  "args": [
+    "--draft",
+    "{input}"
+  ]
+}
