@@ -143,3 +143,7 @@ passes against `example_gate.py`, that a deliberately broken copy of the gate
 fails it, and that the runner refuses a tampered input, an unknown verdict, a
 duplicate id, a path escape, a case file or input symlinked outside `cases/`,
 and a pack with no must-fail case.
+
+## Licence
+
+MIT. See `LICENSE`.
